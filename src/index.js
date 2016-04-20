@@ -1,6 +1,7 @@
 import React from "react";
 import ReactDOM from "react-dom";
 
+import BackGround from "./components/back-ground";
 import QuoteWindow from "./components/quote-window";
 
 import "./scss/app.scss";
@@ -8,7 +9,10 @@ import "./scss/app.scss";
 class Container extends React.Component {
   render() {
     return (
-      <QuoteWindow />
+      <div>
+        <BackGround />
+        <QuoteWindow />
+      </div>
     );
   }
 }
