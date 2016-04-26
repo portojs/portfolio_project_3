@@ -8,9 +8,10 @@ body {
   overflow: hidden;
 }
 
-#circle-bg {
+.circle-bg {
   position: absolute;
   background-color: rgba(255,255,255,0.4);
+  opacity: 0.2;
   border-radius: 100%;
   width: 320px;
   height: 320px;
@@ -45,9 +46,8 @@ body {
 }
 
 .circle-click {
-  opacity: 0;
-  transform: scale(2.0)
-  // -webkit-animation: anim 2s ease;
+  opacity: 1;
+  transform: scale(20.0);
 }
 
 @-webkit-keyframes anim {
