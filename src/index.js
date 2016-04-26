@@ -18,10 +18,11 @@ class Container extends React.Component {
 
     function randomBgColor() {
       var filteredColors = colors.filter(function(color) {
-            return color !== $("body").css("background-color")
-              && $(".circle-bg").css("background-color");
+        // !!! does not work because hex-color is compared to rgba
+            return color != $("body").css("background-color") && $(".circle-bg").css("background-color");
           }),
           randomNumber = Math.floor(Math.random() * (filteredColors.length));
+          console.log(filteredColors);
       return filteredColors[randomNumber];
     }
 
@@ -34,25 +35,47 @@ class Container extends React.Component {
     }
 
     function handleClick() {
-      var circleBg = $(".circle-bg"),
-          newElement = circleBg.clone(true),
-          oldColor = circleBg.css("background-color");
+      var $circleBg = $(".circle-bg"),
+          $this = $("#next-quote"),
+          newElement = $circleBg.clone(true),
+          oldColor = $circleBg.css("background-color");
 
       clearTimeout(timeOut);
-      console.log("Body color: " + $("body").css("background-color") + ". Circle color: " + $(".circle-bg").css("background-color"));
-      // bg-circle grows and covers the whole screen
-      // circleBg.addClass("circle-click");
-      circleBg.addClass("circle-click");
-      // body bg-color = circle bg-color
+      $this.attr("disabled", "disabled");
+      // console.log("Body color: " + $("body").css("background-color") + ". Circle color: " + $(".circle-bg").css("background-color"));
+      newElement.css({"background-color": randomBgColor()});
+      $circleBg.addClass("circle-click");
+
       timeOut = setTimeout(function() {
-        newElement.css({"background-color": randomBgColor()});
-        circleBg.remove();
+        $circleBg.remove();
         $("#wrapper").append(newElement);
         $("body").css({
           "background-color": oldColor
         });
+        $this.removeAttr("disabled");
       }, 700);
-      // set bg-circle color to a new random one
+    }
+
+    function handleClick2() {
+      var $circleBg = $(".circle-bg"),
+          $this = $("#next-quote"),
+          oldColor = $circleBg.css("background-color");
+
+      clearTimeout(timeOut);
+      $this.attr("disabled", "disabled");
+
+      $circleBg.css({"circle-click": "all 1s"});
+      $circleBg.addClass("circle-click");
+
+      timeOut = setTimeout(function() {
+        $("body").css({
+          "background-color": oldColor
+        });
+        $this.removeAttr("disabled");
+        $circleBg.css({"circle-click": ""});
+        $circleBg.removeClass("circle-click");
+        $circleBg.css({"background-color": randomBgColor()});
+      }, 700);
     }
 
     window.onload = function() {
