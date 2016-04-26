@@ -9,16 +9,15 @@ body {
 }
 
 #circle-bg {
-  display: table;
   position: absolute;
   background-color: rgba(255,255,255,0.4);
   border-radius: 100%;
   width: 320px;
   height: 320px;
-  top: 13.5%;
-  left: 12%;
   transition: all 1s;
   z-index: 899;
+  margin: auto;
+  top: 0; left: 0; bottom: 0; right: 0;
 }
 
 #circle-text {
@@ -27,11 +26,11 @@ body {
   position: absolute;
   background-color: rgba(255,255,255,1);
   border-radius: 100%;
-  top: 13.5%;
-  left: 12%;
   width: 320px;
   height: 320px;
   z-index: 999;
+  margin: auto;
+  top: 0; left: 0; bottom: 0; right: 0;
 }
 
 #inner {
@@ -39,52 +38,6 @@ body {
   position: relative;
   top: 50%;
   transform: translateY(-50%);
-}
-
-.g-form1 {
-  position: absolute;
-  background-color: #FF5722;
-  padding: 500px 500px;
-  top: 60%;
-  left: 20%;
-  transition: all 1s;
-  transform: rotate(-47deg);
-  z-index: 2;
-  &-cap {
-    position: absolute;
-    top: -16px;
-    left: 872px;
-    content: "";
-    width: 0;
-    height: 0;
-    border-left: 93px solid transparent;
-    border-right: 93px solid transparent;
-    border-bottom: 100px solid #fff;
-    transform: rotate(47deg);
-    z-index: 5;
-  }
-}
-
-.g-form2 {
-  position: absolute;
-  background-color: #00BCD4;
-  padding: 500px 500px;
-  top: 60%;
-  left: 30%;
-  transition: all 1s;
-  transform: rotate(-47deg);
-  z-index: 3;
-}
-
-.g-form3 {
-  position: absolute;
-  background-color: #8BC34A;
-  padding: 500px 500px;
-  top: 80%;
-  left: -10%;
-  transition: all 1s;
-  transform: rotate(-47deg);
-  z-index: 3;
 }
 
 .enlarge {

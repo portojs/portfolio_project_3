@@ -70,10 +70,6 @@ class Container extends React.Component {
     return (
       <div id="wrapper">
 
-        <div className="g-form1"><div className="g-form1-cap"></div></div>
-        <div className="g-form2"></div>
-        <div className="g-form3"></div>
-
         <div id="circle-text" onMouseEnter={bam} onMouseLeave={babam} >
           <div id="inner">
             <div id="quote-text">Whaaat?</div>
