@@ -7,41 +7,18 @@ class Container extends React.Component {
 
   render() {
 
-    var angle = 0,
-        scaleX = 0,
-        translate1 = 0,
-        translate2 = 0,
-        translate3 = 0,
-        skewX = 0,
-        translateFlag = true,
-        textCircle = $("#circle-text");
-
-    function moveBackground() {
-      angle += 30;
-      scaleX += 0.5;
-      translate1 += Math.floor(Math.random() * (20 - 1)) + 1;
-      translate2 += Math.floor(Math.random() * (20 - 1)) + 1;
-      translate3 += Math.floor(Math.random() * (20 - 1)) + 1;
-      skewX += 10;
-      $(".g-form1").css({"-webkit-transform":
-        "rotate(-47deg) translateX(" + translate1 + "px)"});
-      $(".g-form2").css({"-webkit-transform":
-        "rotate(-47deg) translateX(" + translate2 + "px)"});
-      $(".g-form3").css({"-webkit-transform":
-          "rotate(-47deg) translateY(" + translate3 + "px)"});
-    }
+    var textCircle = $("#circle-text"),
+        colors = ["#E64A19", "#FF5722", "#FFCCBC", "#795548",
+      "#727272", "#D32F2F", "#F44336", "#FF4081", "#7B1FA2",
+    "#9C27B0", "#9C27B0", "#E1BEE7"];
 
     function bam() {
       $("#circle-bg").addClass("enlarge");
     }
-
+,'#FFCCBC',
     function babam() {
       $("#circle-bg").removeClass("enlarge");
     }
-
-    // function reset() {
-    //   $("#circle-bg").css({"opacity": 1, "transform": "scale(1)"});
-    // }
 
     function disappear() {
       var el = $("#circle-bg"),
@@ -52,19 +29,6 @@ class Container extends React.Component {
         el.remove();
         $("#wrapper").append(newElement);
       }, 600);
-      // el.before( el.clone(true) ).remove();
-
-      // console.log(element.classList());
-      // $("#circle-bg").css({"opacity": 0, "transform": "scale(2.0)"});
-      // $('#circle-bg').animate({  textIndent: 0 }, {
-      //     step: function(now,fx) {
-      //       $(this).css('-webkit-transform','scale('+now+')');
-      //     },
-      //     duration:'slow'
-      // },'linear', function() {
-      //   console.log("bam");
-      //   $('#circle-bg').css('-webkit-transform', 'scale(1)');
-      // });
     }
 
     return (
