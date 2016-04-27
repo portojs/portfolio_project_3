@@ -38,6 +38,15 @@ body {
   transform: translateY(-50%);
 }
 
+#quote-text {
+  padding: 0 20px 10px;
+}
+
+#quote-author {
+  text-align: right;
+  padding: 0 35px 10px;
+}
+
 .circle-click {
   opacity: 1;
   transform: scale(20.0);
