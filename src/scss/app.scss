@@ -39,18 +39,21 @@ body {
   top: 50%;
   transform: translateY(-50%);
   #quote-text {
-    transition: opacity .4s;
+    transition: all .4s;
     opacity: 0;
     padding: 0 20px 10px;
   }
   #quote-author {
-    transition: opacity .4s;
+    transition: all .4s;
     opacity: 0;
     text-align: right;
     padding: 0 35px 15px;
   }
-  span {
+  button {
+    background-color: #fff;
     padding: 10px;
+    border: 1px solid #000;
+    border-radius: 50%;
     i {
       transition: color .4s;
       font-size: 1.5em;

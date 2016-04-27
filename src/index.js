@@ -35,8 +35,9 @@ class Container extends React.Component {
     function animateBgColor() {
       var $circleBg = $(".circle-bg"),
           $button = $("#next-quote"),
-          newElement = $circleBg.clone(true),
-          oldColor = $circleBg.css("background-color");
+          newElement = $circleBg.clone(true);
+
+      oldColor = $circleBg.css("background-color");
 
       clearTimeout(timeOut);
       $button.attr("disabled", "disabled");
@@ -58,19 +59,20 @@ class Container extends React.Component {
 
     function generateQuote() {
       $.getJSON("http://api.forismatic.com/api/1.0/?method=getQuote&lang=en&format=jsonp&jsonp=?", function(data) {
-        $("#quote-text").css({"opacity": 0});
-        $("#quote-author").css({"opacity": 0});
+        $("#quote-text").css({"opacity": 0, "color": oldColor});
+        $("#quote-author").css({"opacity": 0, "color": oldColor});
         window.setTimeout(function() {
+          animateBgColor();
           $("#quote-text").html(data.quoteText);
           data.quoteAuthor ? $("#quote-author").html("- " + data.quoteAuthor) : $("#quote-author").html("");
           $("#quote-text").css({"opacity": 1});
           $("#quote-author").css({"opacity": 1});
-        }, 700);
+        }, 500);
       })
     }
 
     function handleClick() {
-      animateBgColor();
+      // animateBgColor();
       generateQuote();
     }
 
@@ -92,8 +94,8 @@ class Container extends React.Component {
           <div id="inner">
             <div id="quote-text">Whaaat?</div>
             <div id="quote-author"></div>
-            <span onClick={handleClick} id="tweet"><i className="fa fa-twitter"></i></span>
-            <span onClick={handleClick} id="next-quote"><i className="fa fa-play"></i></span>
+            <button onClick={handleClick} id="tweet"><i className="fa fa-twitter"></i></button>
+            <button onClick={handleClick} id="next-quote"><i className="fa fa-play"></i></button>
           </div>
         </div>
 
