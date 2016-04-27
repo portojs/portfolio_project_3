@@ -12,7 +12,7 @@ body {
   border-radius: 100%;
   width: 320px;
   height: 320px;
-  transition: all 1.7s;
+  transition: transform 1.7s;
   z-index: 899;
   margin: auto;
   top: 0; left: 0; bottom: 0; right: 0;
@@ -39,26 +39,16 @@ body {
 }
 
 #quote-text {
+  transition: opacity .4s;
   padding: 0 20px 10px;
 }
 
 #quote-author {
+  transition: opacity .4s;
   text-align: right;
   padding: 0 35px 10px;
 }
 
 .circle-click {
-  opacity: 1;
   transform: scale(20.0);
-}
-
-@-webkit-keyframes anim {
-    from {
-        opacity: 1;
-        transform: scale(1.0)
-    }
-    to {
-        opacity: 0;
-        transform: scale(2.0)
-    }
 }
