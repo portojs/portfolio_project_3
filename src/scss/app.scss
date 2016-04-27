@@ -9,12 +9,10 @@ body {
 
 .circle-bg {
   position: absolute;
-  background-color: rgba(255,255,255,0.4);
-  opacity: 0.3;
   border-radius: 100%;
   width: 320px;
   height: 320px;
-  transition: all .7s;
+  transition: all 1.7s;
   z-index: 899;
   margin: auto;
   top: 0; left: 0; bottom: 0; right: 0;
@@ -38,10 +36,6 @@ body {
   position: relative;
   top: 50%;
   transform: translateY(-50%);
-}
-
-.enlarge {
-  transform: scale(1.1);
 }
 
 .circle-click {

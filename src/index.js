@@ -22,27 +22,19 @@ class Container extends React.Component {
             return color != $("body").css("background-color") && $(".circle-bg").css("background-color");
           }),
           randomNumber = Math.floor(Math.random() * (filteredColors.length));
-          console.log(filteredColors);
+          // console.log(filteredColors);
       return filteredColors[randomNumber];
-    }
-
-    function bam() {
-      $(".circle-bg").addClass("enlarge");
-    }
-
-    function babam() {
-      $(".circle-bg").removeClass("enlarge");
     }
 
     function handleClick() {
       var $circleBg = $(".circle-bg"),
-          $this = $("#next-quote"),
+          $button = $("#next-quote"),
           newElement = $circleBg.clone(true),
           oldColor = $circleBg.css("background-color");
 
+      console.log($(".circle-bg").css("background-color"));
       clearTimeout(timeOut);
-      $this.attr("disabled", "disabled");
-      // console.log("Body color: " + $("body").css("background-color") + ". Circle color: " + $(".circle-bg").css("background-color"));
+      $button.attr("disabled", "disabled");
       newElement.css({"background-color": randomBgColor()});
       $circleBg.addClass("circle-click");
 
@@ -52,30 +44,9 @@ class Container extends React.Component {
         $("body").css({
           "background-color": oldColor
         });
-        $this.removeAttr("disabled");
+        console.log($("body").css("background-color"));
+        $button.removeAttr("disabled");
       }, 700);
-    }
-
-    function handleClick2() {
-      var $circleBg = $(".circle-bg"),
-          $this = $("#next-quote"),
-          oldColor = $circleBg.css("background-color");
-
-      clearTimeout(timeOut);
-      $this.attr("disabled", "disabled");
-
-      $circleBg.css({"circle-click": "all 1s"});
-      $circleBg.addClass("circle-click");
-
-      timeOut = setTimeout(function() {
-        $("body").css({
-          "background-color": oldColor
-        });
-        $this.removeAttr("disabled");
-        $circleBg.css({"circle-click": ""});
-        $circleBg.removeClass("circle-click");
-        $circleBg.css({"background-color": randomBgColor()});
-      }, 1700);
     }
 
     window.onload = function() {
