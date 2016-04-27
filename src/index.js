@@ -56,11 +56,13 @@ class Container extends React.Component {
     function generateQuote() {
       $.getJSON("http://api.forismatic.com/api/1.0/?method=getQuote&lang=en&format=jsonp&jsonp=?", function(data) {
         $("#quote-text").html(data.quoteText);
-        data.quoteAuthor ? $("#quote-author").html("-- " + data.quoteAuthor) : $("#quote-author").html("");
+        $("#quote-text").fadeIn();
+        data.quoteAuthor ? $("#quote-author").html("- " + data.quoteAuthor) : $("#quote-author").html("");
       })
     }
 
     function handleClick() {
+      $("#quote-text").fadeOut();
       animateBgColor();
       generateQuote();
     }
