@@ -4,10 +4,12 @@
 }
 
 body {
+  background-color: #E64A19;
   overflow: hidden;
 }
 
 .circle-bg {
+  background-color: #303F9F;
   position: absolute;
   border-radius: 100%;
   width: 320px;
@@ -36,17 +38,24 @@ body {
   position: relative;
   top: 50%;
   transform: translateY(-50%);
-}
-
-#quote-text {
-  transition: opacity .4s;
-  padding: 0 20px 10px;
-}
-
-#quote-author {
-  transition: opacity .4s;
-  text-align: right;
-  padding: 0 35px 10px;
+  #quote-text {
+    transition: opacity .4s;
+    opacity: 0;
+    padding: 0 20px 10px;
+  }
+  #quote-author {
+    transition: opacity .4s;
+    opacity: 0;
+    text-align: right;
+    padding: 0 35px 15px;
+  }
+  span {
+    padding: 10px;
+    i {
+      transition: color .4s;
+      font-size: 1.5em;
+    }
+  }
 }
 
 .circle-click {

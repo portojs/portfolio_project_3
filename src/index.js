@@ -42,6 +42,9 @@ class Container extends React.Component {
       $button.attr("disabled", "disabled");
       newElement.css({"background-color": randomColor()});
       $circleBg.addClass("circle-click");
+      $("i").css({
+        "color": oldColor
+      });
 
       timeOut = window.setTimeout(function() {
         $circleBg.remove();
@@ -72,13 +75,14 @@ class Container extends React.Component {
     }
 
     window.onload = function() {
-      generateQuote();
-      $("body").css({
-        "background-color": randomColor()
-      });
-      $(".circle-bg").css({
-        "background-color": randomColor()
-      });
+      handleClick();
+      // generateQuote();
+      // $("body").css({
+      //   "background-color": randomColor()
+      // });
+      // $(".circle-bg").css({
+      //   "background-color": randomColor()
+      // });
     }
 
     return (
@@ -88,7 +92,8 @@ class Container extends React.Component {
           <div id="inner">
             <div id="quote-text">Whaaat?</div>
             <div id="quote-author"></div>
-            <button onClick={handleClick} id="next-quote">Next Quote</button>
+            <span onClick={handleClick} id="tweet"><i className="fa fa-twitter"></i></span>
+            <span onClick={handleClick} id="next-quote"><i className="fa fa-play"></i></span>
           </div>
         </div>
 
