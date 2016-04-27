@@ -46,7 +46,7 @@ class Container extends React.Component {
       newElement.css({"background-color": randomBgColor()});
       $circleBg.addClass("circle-click");
 
-      timeOut = setTimeout(function() {
+      timeOut = window.setTimeout(function() {
         $circleBg.remove();
         $("#wrapper").append(newElement);
         $("body").css({
@@ -75,7 +75,7 @@ class Container extends React.Component {
         $circleBg.css({"circle-click": ""});
         $circleBg.removeClass("circle-click");
         $circleBg.css({"background-color": randomBgColor()});
-      }, 700);
+      }, 1700);
     }
 
     window.onload = function() {
