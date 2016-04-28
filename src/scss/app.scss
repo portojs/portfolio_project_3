@@ -7,7 +7,7 @@ body {
   background-color: #303F9F;
   color: #303F9F;
   overflow: hidden;
-  // transition: background-color 0.5s;
+  transition: background-color 2s;
 }
 
 .circle-bg {
@@ -41,21 +41,25 @@ body {
   top: 50%;
   transform: translateY(-50%);
   #quote-text {
-    transition: color .4s;
+    transition: color 2s;
     opacity: 0;
     padding: 0 20px 10px;
   }
   #quote-author {
-    transition: color .4s;
+    transition: color 2s;
     opacity: 0;
     text-align: right;
     padding: 0 35px 15px;
   }
-  span {
-    padding: 10px;
-    i {
-      // transition: color .4s;
-      font-size: 1.5em;
+  #buttons {
+    position: relative;
+    bottom: -50px;
+    span {
+      padding: 10px;
+      i {
+        // transition: color .4s;
+        font-size: 1.5em;
+      }
     }
   }
 }

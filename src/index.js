@@ -82,11 +82,10 @@ class Container extends React.Component {
           $("#quote-text").html(data.quoteText);
           data.quoteAuthor ? $("#quote-author").html("- " + data.quoteAuthor) : $("#quote-author").html("");
       }).done(function() {
-        $("body").animate({
-          backgroundColor: mainColor,
-          color: randomColor()
-        }, 1500, function() {
-          console.log("great");
+        console.log("Done!");
+        $("body").css({
+          "background-color": mainColor,
+          "color": mainColor
         });
         $(".circle-bg").css({
           "background-color": randomColor()
@@ -101,6 +100,9 @@ class Container extends React.Component {
         $("#quote-text").html("CONNECTION FAILURE");
         $("#quote-author").html("");
       });
+      // $("body").css({
+      //   "transition": "none"
+      // });
     }
 
     return (
@@ -110,8 +112,10 @@ class Container extends React.Component {
           <div id="inner">
             <div id="quote-text">Whaaat?</div>
             <div id="quote-author"></div>
-            <span onClick={handleClick} id="tweet"><i className="fa fa-twitter"></i></span>
-            <span onClick={handleClick} id="next-quote"><i className="fa fa-play"></i></span>
+            <div id="buttons">
+              <span onClick={handleClick} id="tweet"><i className="fa fa-twitter"></i></span>
+              <span onClick={handleClick} id="next-quote"><i className="fa fa-play"></i></span>
+            </div>
           </div>
         </div>
 
