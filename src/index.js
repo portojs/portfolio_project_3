@@ -62,7 +62,7 @@ class Container extends React.Component {
         $("#quote-text").css({"opacity": 0, "color": oldColor});
         $("#quote-author").css({"opacity": 0, "color": oldColor});
         window.setTimeout(function() {
-          animateBgColor();
+          // animateBgColor();
           $("#quote-text").html(data.quoteText);
           data.quoteAuthor ? $("#quote-author").html("- " + data.quoteAuthor) : $("#quote-author").html("");
           $("#quote-text").css({"opacity": 1});
@@ -72,19 +72,35 @@ class Container extends React.Component {
     }
 
     function handleClick() {
-      // animateBgColor();
+      animateBgColor();
       generateQuote();
     }
 
     window.onload = function() {
-      handleClick();
-      // generateQuote();
-      // $("body").css({
-      //   "background-color": randomColor()
-      // });
-      // $(".circle-bg").css({
-      //   "background-color": randomColor()
-      // });
+      var mainColor = randomColor();
+      $.getJSON("http://api.forismatic.com/api/1.0/?method=getQuote&lang=en&format=jsonp&jsonp=?", function(data) {
+          $("#quote-text").html(data.quoteText);
+          data.quoteAuthor ? $("#quote-author").html("- " + data.quoteAuthor) : $("#quote-author").html("");
+      }).done(function() {
+        $("body").animate({
+          backgroundColor: mainColor,
+          color: randomColor()
+        }, 1500, function() {
+          console.log("great");
+        });
+        $(".circle-bg").css({
+          "background-color": randomColor()
+        });
+        $("#quote-text").css({
+          "opacity": 1
+        });
+        $("#quote-author").css({
+          "opacity": 1
+        });
+      }).fail(function() {
+        $("#quote-text").html("CONNECTION FAILURE");
+        $("#quote-author").html("");
+      });
     }
 
     return (
@@ -94,8 +110,8 @@ class Container extends React.Component {
           <div id="inner">
             <div id="quote-text">Whaaat?</div>
             <div id="quote-author"></div>
-            <button onClick={handleClick} id="tweet"><i className="fa fa-twitter"></i></button>
-            <button onClick={handleClick} id="next-quote"><i className="fa fa-play"></i></button>
+            <span onClick={handleClick} id="tweet"><i className="fa fa-twitter"></i></span>
+            <span onClick={handleClick} id="next-quote"><i className="fa fa-play"></i></span>
           </div>
         </div>
 
