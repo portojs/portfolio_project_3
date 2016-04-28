@@ -75,7 +75,7 @@ class Container extends React.Component {
     }
 
     function handleClick() {
-      if (onLoadTimeOut > 0) {
+      if (onLoadTimeOut) {
         return null;
       } else {
         animateBgColor();
@@ -99,12 +99,6 @@ class Container extends React.Component {
         $(".circle-bg").css({
           "background-color": randomColor()
         });
-        $quoteText.css({
-          "opacity": 1
-        });
-        $quoteAuthor.css({
-          "opacity": 1
-        });
       }).fail(function() {
         $quoteText.html("CONNECTION FAILURE");
         $quoteAuthor.html("");
@@ -114,8 +108,17 @@ class Container extends React.Component {
           $("body").css({
             "transition": "none"
           });
+          $("i").css({
+            "opacity": 1
+          });
+          $quoteText.css({
+            "opacity": 1
+          });
+          $quoteAuthor.css({
+            "opacity": 1
+          });
           onLoadTimeOut = 0;
-        }, 2000
+        }, 800
       );
     }
 
