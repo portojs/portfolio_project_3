@@ -15,7 +15,8 @@ class Container extends React.Component {
                   "#B2DFDB"],
         oldColor = "",
         slicedColor = "",
-        timeOut;
+        timeOut,
+        onLoadTimeOut;
 
     function randomColor() {
       var filteredColors, randomNumber;
@@ -58,31 +59,39 @@ class Container extends React.Component {
     }
 
     function generateQuote() {
+      var $quoteText = $("#quote-text"),
+          $quoteAuthor = $("#quote-author");
+
       $.getJSON("http://api.forismatic.com/api/1.0/?method=getQuote&lang=en&format=jsonp&jsonp=?", function(data) {
-        $("#quote-text").css({"opacity": 0, "color": oldColor});
-        $("#quote-author").css({"opacity": 0, "color": oldColor});
+        $quoteText.css({"opacity": 0, "color": oldColor});
+        $quoteAuthor.css({"opacity": 0, "color": oldColor});
         window.setTimeout(function() {
-          // animateBgColor();
-          $("#quote-text").html(data.quoteText);
-          data.quoteAuthor ? $("#quote-author").html("- " + data.quoteAuthor) : $("#quote-author").html("");
-          $("#quote-text").css({"opacity": 1});
-          $("#quote-author").css({"opacity": 1});
+          $quoteText.html(data.quoteText);
+          data.quoteAuthor ? $quoteAuthor.html("- " + data.quoteAuthor) : $quoteAuthor.html("");
+          $quoteText.css({"opacity": 1});
+          $quoteAuthor.css({"opacity": 1});
         }, 500);
       })
     }
 
     function handleClick() {
-      animateBgColor();
-      generateQuote();
+      if (onLoadTimeOut > 0) {
+        return null;
+      } else {
+        animateBgColor();
+        generateQuote();
+      }
     }
 
     window.onload = function() {
-      var mainColor = randomColor();
+      var mainColor = randomColor(),
+          $quoteText = $("#quote-text"),
+          $quoteAuthor = $("#quote-author");
+
       $.getJSON("http://api.forismatic.com/api/1.0/?method=getQuote&lang=en&format=jsonp&jsonp=?", function(data) {
-          $("#quote-text").html(data.quoteText);
-          data.quoteAuthor ? $("#quote-author").html("- " + data.quoteAuthor) : $("#quote-author").html("");
+          $quoteText.html(data.quoteText);
+          data.quoteAuthor ? $quoteAuthor.html("- " + data.quoteAuthor) : $quoteAuthor.html("");
       }).done(function() {
-        console.log("Done!");
         $("body").css({
           "background-color": mainColor,
           "color": mainColor
@@ -90,19 +99,24 @@ class Container extends React.Component {
         $(".circle-bg").css({
           "background-color": randomColor()
         });
-        $("#quote-text").css({
+        $quoteText.css({
           "opacity": 1
         });
-        $("#quote-author").css({
+        $quoteAuthor.css({
           "opacity": 1
         });
       }).fail(function() {
-        $("#quote-text").html("CONNECTION FAILURE");
-        $("#quote-author").html("");
+        $quoteText.html("CONNECTION FAILURE");
+        $quoteAuthor.html("");
       });
-      // $("body").css({
-      //   "transition": "none"
-      // });
+      onLoadTimeOut = window.setTimeout(
+        function() {
+          $("body").css({
+            "transition": "none"
+          });
+          onLoadTimeOut = 0;
+        }, 2000
+      );
     }
 
     return (
@@ -110,7 +124,7 @@ class Container extends React.Component {
 
         <div id="circle-text" >
           <div id="quote">
-            <div id="quote-text">Whaaat?</div>
+            <div id="quote-text"></div>
             <div id="quote-author"></div>
           </div>
           <div id="buttons">
