@@ -7,15 +7,24 @@ class Container extends React.Component {
 
   render() {
 
-    var colors = ["#E64A19", "#FF5722", "#FFCCBC", "#795548",
-                  "#727272", "#D32F2F", "#F44336", "#FF4081",
-                  "#7B1FA2", "#9C27B0", "#E1BEE7", "#7C4DFF",
-                  "#303F9F", "#3F51B5", "#C5CAE9", "#448AFF",
-                  "#0288D1", "#03A9F4", "#00BCD4", "#009688",
+    var colors = ["#E64A19", "#FF5722", "#FFCCBC", "#795548", "#727272",
+                  "#D32F2F", "#F44336", "#FF4081", "#7B1FA2", "#9C27B0",
+                  "#E1BEE7", "#7C4DFF", "#303F9F", "#3F51B5", "#C5CAE9",
+                  "#448AFF", "#0288D1", "#03A9F4", "#00BCD4", "#009688",
                   "#B2DFDB"],
         oldColor = "",
         slicedColor = "",
         onLoadTimeOut;
+
+    function getQuote() {
+      $.getJSON("http://api.forismatic.com/api/1.0/?method=getQuote&lang=en&format=jsonp&jsonp=?", function(data) {
+      }).fail(function() {
+        $quoteText.html("NO QUOTE AVAILABLE");
+        $quoteAuthor.html("");
+      }).done(function(data) {
+        console.log(data);
+      });
+    }
 
     function randomColor() {
       var filteredColors,
@@ -104,6 +113,7 @@ class Container extends React.Component {
           $quoteText = $("#quote-text"),
           $quoteAuthor = $("#quote-author");
 
+      getQuote();
       generateQuote();
       $("body").css({
         "background-color": mainColor,
