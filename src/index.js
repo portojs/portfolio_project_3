@@ -15,11 +15,12 @@ class Container extends React.Component {
                   "#B2DFDB"],
         oldColor = "",
         slicedColor = "",
-        timeOut,
         onLoadTimeOut;
 
     function randomColor() {
-      var filteredColors, randomNumber;
+      var filteredColors,
+          randomNumber;
+
       if (slicedColor) {
         filteredColors = colors.filter(function(color) {
           return color !== slicedColor;
@@ -40,7 +41,6 @@ class Container extends React.Component {
 
       oldColor = $circleBg.css("background-color");
 
-      clearTimeout(timeOut);
       $button.attr("disabled", "disabled");
       newElement.css({"background-color": randomColor()});
       $circleBg.addClass("circle-click");
@@ -48,7 +48,7 @@ class Container extends React.Component {
         "color": oldColor
       });
 
-      timeOut = window.setTimeout(function() {
+      window.setTimeout(function() {
         $circleBg.remove();
         $("#wrapper").append(newElement);
         $("body").css({
@@ -63,23 +63,39 @@ class Container extends React.Component {
           $quoteAuthor = $("#quote-author");
 
       $.getJSON("http://api.forismatic.com/api/1.0/?method=getQuote&lang=en&format=jsonp&jsonp=?", function(data) {
-        $quoteText.css({"opacity": 0, "color": oldColor});
-        $quoteAuthor.css({"opacity": 0, "color": oldColor});
-        window.setTimeout(function() {
           $quoteText.html(data.quoteText);
           data.quoteAuthor ? $quoteAuthor.html("- " + data.quoteAuthor) : $quoteAuthor.html("");
-          $quoteText.css({"opacity": 1});
-          $quoteAuthor.css({"opacity": 1});
-        }, 500);
-      })
+      }).fail(function() {
+        $quoteText.html("CONNECTION FAILURE");
+        $quoteAuthor.html("");
+      });
     }
 
     function handleClick() {
+      var $quoteText = $("#quote-text"),
+          $quoteAuthor = $("#quote-author");
+
       if (onLoadTimeOut) {
         return null;
       } else {
-        animateBgColor();
-        generateQuote();
+        $quoteText.css({
+          "opacity": 0
+        });
+        $quoteAuthor.css({
+          "opacity": 0
+        });
+        window.setTimeout(function() {
+          animateBgColor();
+          generateQuote();
+          $quoteText.css({
+            "opacity": 1,
+            "color": oldColor
+          });
+          $quoteAuthor.css({
+            "opacity": 1,
+            "color": oldColor
+          });
+        }, 800)
       }
     }
 
@@ -88,21 +104,15 @@ class Container extends React.Component {
           $quoteText = $("#quote-text"),
           $quoteAuthor = $("#quote-author");
 
-      $.getJSON("http://api.forismatic.com/api/1.0/?method=getQuote&lang=en&format=jsonp&jsonp=?", function(data) {
-          $quoteText.html(data.quoteText);
-          data.quoteAuthor ? $quoteAuthor.html("- " + data.quoteAuthor) : $quoteAuthor.html("");
-      }).done(function() {
-        $("body").css({
-          "background-color": mainColor,
-          "color": mainColor
-        });
-        $(".circle-bg").css({
-          "background-color": randomColor()
-        });
-      }).fail(function() {
-        $quoteText.html("CONNECTION FAILURE");
-        $quoteAuthor.html("");
+      generateQuote();
+      $("body").css({
+        "background-color": mainColor,
+        "color": mainColor
       });
+      $(".circle-bg").css({
+        "background-color": randomColor()
+      });
+
       onLoadTimeOut = window.setTimeout(
         function() {
           $("body").css({
@@ -112,10 +122,12 @@ class Container extends React.Component {
             "opacity": 1
           });
           $quoteText.css({
-            "opacity": 1
+            "opacity": 1,
+            "transition-property": "opacity"
           });
           $quoteAuthor.css({
-            "opacity": 1
+            "opacity": 1,
+            "transition-property": "opacity"
           });
           onLoadTimeOut = 0;
         }, 800
