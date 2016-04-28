@@ -109,13 +109,13 @@ class Container extends React.Component {
       <div id="wrapper">
 
         <div id="circle-text" >
-          <div id="inner">
+          <div id="quote">
             <div id="quote-text">Whaaat?</div>
             <div id="quote-author"></div>
-            <div id="buttons">
-              <span onClick={handleClick} id="tweet"><i className="fa fa-twitter"></i></span>
-              <span onClick={handleClick} id="next-quote"><i className="fa fa-play"></i></span>
-            </div>
+          </div>
+          <div id="buttons">
+            <span onClick={handleClick} id="tweet"><i className="fa fa-twitter"></i></span>
+            <span onClick={handleClick} id="next-quote"><i className="fa fa-play"></i></span>
           </div>
         </div>
 
