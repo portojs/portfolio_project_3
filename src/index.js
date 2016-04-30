@@ -14,17 +14,8 @@ class Container extends React.Component {
                   "#B2DFDB"],
         oldColor = "",
         slicedColor = "",
-        onLoadTimeOut;
-
-    function getQuote() {
-      $.getJSON("http://api.forismatic.com/api/1.0/?method=getQuote&lang=en&format=jsonp&jsonp=?", function(data) {
-      }).fail(function() {
-        $quoteText.html("NO QUOTE AVAILABLE");
-        $quoteAuthor.html("");
-      }).done(function(data) {
-        console.log(data);
-      });
-    }
+        onLoadTimeOut,
+        blockButton;
 
     function randomColor() {
       var filteredColors,
@@ -45,17 +36,15 @@ class Container extends React.Component {
 
     function animateBgColor() {
       var $circleBg = $(".circle-bg"),
-          $button = $("#next-quote"),
           newElement = $circleBg.clone(true);
 
       oldColor = $circleBg.css("background-color");
 
-      $button.attr("disabled", "disabled");
       newElement.css({"background-color": randomColor()});
       $circleBg.addClass("circle-click");
-      $("i").css({
-        "color": oldColor
-      });
+      $("i").animate({
+        color: oldColor
+      }, 800);
 
       window.setTimeout(function() {
         $circleBg.remove();
@@ -63,7 +52,6 @@ class Container extends React.Component {
         $("body").css({
           "background-color": oldColor
         });
-        $button.removeAttr("disabled");
       }, 700);
     }
 
@@ -84,27 +72,33 @@ class Container extends React.Component {
       var $quoteText = $("#quote-text"),
           $quoteAuthor = $("#quote-author");
 
-      if (onLoadTimeOut) {
+      if (onLoadTimeOut || blockButton) {
         return null;
       } else {
-        $quoteText.css({
-          "opacity": 0
-        });
-        $quoteAuthor.css({
-          "opacity": 0
-        });
-        window.setTimeout(function() {
+        blockButton = true;
+        $quoteText.animate({
+          opacity: 0
+        }, 800);
+        $quoteAuthor.animate({
+          opacity: 0
+        }, 800, function() {
           animateBgColor();
           generateQuote();
           $quoteText.css({
-            "opacity": 1,
             "color": oldColor
           });
           $quoteAuthor.css({
-            "opacity": 1,
             "color": oldColor
           });
-        }, 800)
+          $quoteText.animate({
+            opacity: 1
+          }, 800);
+          $quoteAuthor.animate({
+            opacity: 1
+          }, 800, function() {
+            blockButton = false;
+          });
+        });
       }
     }
 
@@ -113,32 +107,27 @@ class Container extends React.Component {
           $quoteText = $("#quote-text"),
           $quoteAuthor = $("#quote-author");
 
-      getQuote();
       generateQuote();
-      $("body").css({
-        "background-color": mainColor,
-        "color": mainColor
+      $("body").animate({
+        backgroundColor: mainColor,
+        color: mainColor
       });
-      $(".circle-bg").css({
-        "background-color": randomColor()
+      $(".circle-bg").animate({
+        backgroundColor: randomColor()
       });
 
+      // this timeout is needed to show text only after a new quote is loaded and all animations are finished
       onLoadTimeOut = window.setTimeout(
         function() {
-          $("body").css({
-            "transition": "none"
-          });
-          $("i").css({
-            "opacity": 1
-          });
-          $quoteText.css({
-            "opacity": 1,
-            "transition-property": "opacity"
-          });
-          $quoteAuthor.css({
-            "opacity": 1,
-            "transition-property": "opacity"
-          });
+          $("i").animate({
+            opacity: 1
+          }, 800);
+          $quoteText.animate({
+            opacity: 1
+          }, 800);
+          $quoteAuthor.animate({
+            opacity: 1
+          }, 800);
           onLoadTimeOut = 0;
         }, 800
       );
@@ -149,8 +138,8 @@ class Container extends React.Component {
 
         <div id="circle-text" >
           <div id="quote">
-            <div id="quote-text"></div>
-            <div id="quote-author"></div>
+            <div id="quote-text">Text</div>
+            <div id="quote-author">Author</div>
           </div>
           <div id="buttons">
             <span onClick={handleClick} id="tweet"><i className="fa fa-twitter"></i></span>

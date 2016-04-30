@@ -8,7 +8,7 @@ body {
   font-family: 'Josefin Sans', sans-serif;
   color: #303F9F;
   overflow: hidden;
-  transition: background-color .8s;
+  // transition: background-color .8s;
 }
 
 .circle-bg {
@@ -36,20 +36,20 @@ body {
 }
 
 #quote {
-  font-size: 1.3em;
+  font-size: 1.2em;
   text-align: center;
   position: relative;
   top: 50%;
   transform: translateY(-50%);
   #quote-text {
-    transition-property: opacity, color;
-    transition-duration: .8s;
+    // transition-property: opacity, color;
+    // transition-duration: .8s;
     opacity: 0;
     padding: 0 20px 10px;
   }
   #quote-author {
-    transition-property: opacity, color;
-    transition-duration: .8s;
+    // transition-property: opacity, color;
+    // transition-duration: .8s;
     opacity: 0;
     text-align: right;
     padding: 0 35px;
@@ -63,8 +63,8 @@ body {
   span {
     padding: 10px;
     i {
-      transition-property: opacity, color;
-      transition-duration: 1.5s;
+      // transition-property: opacity, color;
+      // transition-duration: 1.5s;
       opacity: 0;
       &.fa-twitter {
         font-size: 2em;
