@@ -16,12 +16,6 @@ class Container extends React.Component {
         onLoadTimeOut,
         blockButton;
 
-        // ["#E64A19", "#FF5722", "#FFCCBC", "#795548", "#727272",
-        //               "#D32F2F", "#F44336", "#FF4081", "#7B1FA2", "#9C27B0",
-        //               "#E1BEE7", "#7C4DFF", "#303F9F", "#3F51B5", "#C5CAE9",
-        //               "#448AFF", "#0288D1", "#03A9F4", "#00BCD4", "#009688",
-        //               "#B2DFDB"]
-
     function randomColor() {
       var filteredColors,
           randomNumber;
